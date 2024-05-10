@@ -7,7 +7,7 @@ pub struct Config {
 
     pub futures_rest_api_endpoint: String,
     pub futures_ws_endpoint: String,
-
+    pub futures_ws_trading_endpoint: String,
     pub recv_window: u64,
 
     pub binance_us_api: bool,
@@ -28,6 +28,7 @@ impl Config {
             .set_ws_endpoint("wss://testnet.binance.vision")
             .set_futures_rest_api_endpoint("https://testnet.binancefuture.com")
             .set_futures_ws_endpoint("wss://fstream.binancefuture.com")
+            .set_futures_ws_trading_endpoint("wss://testnet.binancefuture.com/ws-fapi/v1")
     }
 
     /// Sets the rest api endpoint. Defaults to <https://api.binance.com>.
@@ -109,6 +110,10 @@ impl Config {
         self.futures_ws_endpoint = futures_ws_endpoint.into();
         self
     }
+    pub fn set_futures_ws_trading_endpoint<T: Into<String>>(mut self, futures_ws_trading_endpoint: T) -> Self {
+        self.futures_ws_trading_endpoint = futures_ws_trading_endpoint.into();
+        self
+    }
 
     /// Sets the 'receive window'. The receive window is the number of milliseconds after timestamp
     /// the request is valid for.
@@ -166,7 +171,7 @@ impl Default for Config {
 
             futures_rest_api_endpoint: "https://fapi.binance.com".into(),
             futures_ws_endpoint: "wss://fstream.binance.com".into(),
-
+            futures_ws_trading_endpoint: "wss://ws-fapi.binance.com/ws-fapi/v1".into(),
             recv_window: 5000,
             binance_us_api: false,
 

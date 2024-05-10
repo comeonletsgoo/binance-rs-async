@@ -50,7 +50,7 @@ pub enum ReasonType {
     CoinSwapWithdraw,
 }
 
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Deserialize, Clone)]
 pub struct Balance {
     #[serde(rename = "a")]
     pub asset: String,
@@ -62,7 +62,7 @@ pub struct Balance {
     pub balance_change: f64,
 }
 
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Deserialize, Clone)]
 pub struct Position {
     #[serde(rename = "s")]
     pub symbol: String,
