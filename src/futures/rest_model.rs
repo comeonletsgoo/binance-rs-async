@@ -46,12 +46,15 @@ pub struct Symbol {
     pub quote_precision: u64,
     pub underlying_type: String,
     pub underlying_sub_type: Vec<String>,
-    pub settle_plan: u64,
+    // pub settle_plan: u64,
     #[serde(with = "string_or_float")]
     pub trigger_protect: f64,
     pub filters: Vec<Filters>,
     pub order_types: Vec<OrderType>,
     pub time_in_force: Vec<TimeInForce>,
+    pub liquidation_fee: String,
+    pub market_take_bound: String,
+    pub max_move_order_limit: u64
 }
 
 #[derive(Debug, Deserialize, Serialize, Clone)]
