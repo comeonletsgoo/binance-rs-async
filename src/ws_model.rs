@@ -277,17 +277,17 @@ pub struct MarkPriceEvent {
     #[serde(rename = "s")]
     pub symbol: String,
 
-    #[serde(rename = "p")]
-    pub mark_price: String,
+    #[serde(rename = "p", with = "string_or_float")]
+    pub mark_price: f64,
 
-    #[serde(rename = "i")]
-    pub index_price: String,
+    #[serde(rename = "i", with = "string_or_float")]
+    pub index_price: f64,
 
-    #[serde(rename = "P")]
-    pub estimated_settle_price: String,
+    #[serde(rename = "P", with = "string_or_float")]
+    pub estimated_settle_price: f64,
 
-    #[serde(rename = "r")]
-    pub funding_rate: String,
+    #[serde(rename = "r", with = "string_or_float")]
+    pub funding_rate: f64,
 
     #[serde(rename = "T")]
     pub next_funding_time: u64,
