@@ -26,7 +26,7 @@ pub struct Symbol {
     pub base_asset: String,
     pub base_asset_precision: u64,
     pub quote_asset: String,
-    pub quote_precision: u64,
+    pub quote_precision: u16,
     pub quote_asset_precision: u64,
     pub base_commission_precision: u64,
     pub quote_commission_precision: u64,
@@ -55,7 +55,12 @@ impl Symbol {
             .cloned()
     }
 }
-
+#[derive(Debug, Serialize, Deserialize, Clone)]
+pub struct SymbolFull {
+    pub symbol : Symbol,
+    pub last_price: f64,
+    pub last_update_time: i64,
+}
 #[derive(Debug, Serialize, Deserialize, Clone, PartialEq)]
 #[serde(tag = "filterType")]
 pub enum Filters {

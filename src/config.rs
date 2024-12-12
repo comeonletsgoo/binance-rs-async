@@ -4,7 +4,7 @@ pub static DATA_REST_ENDPOINT: &str = "https://api.binance.com";
 pub struct Config {
     pub rest_api_endpoint: String,
     pub ws_endpoint: String,
-
+    pub spot_ws_trading_endpoint: String,
     pub futures_rest_api_endpoint: String,
     pub futures_ws_endpoint: String,
     pub futures_ws_trading_endpoint: String,
@@ -26,6 +26,7 @@ impl Config {
         Config::default()
             .set_rest_api_endpoint("https://testnet.binance.vision")
             .set_ws_endpoint("wss://testnet.binance.vision")
+            .set_spot_ws_trading_endpoint("wss://testnet.binance.vision/ws-api/v3")
             .set_futures_rest_api_endpoint("https://testnet.binancefuture.com")
             .set_futures_ws_endpoint("wss://fstream.binancefuture.com")
             .set_futures_ws_trading_endpoint("wss://testnet.binancefuture.com/ws-fapi/v1")
@@ -70,7 +71,10 @@ impl Config {
         self.ws_endpoint = ws_endpoint.into();
         self
     }
-
+    pub fn set_spot_ws_trading_endpoint<T: Into<String>>(mut self, spot_ws_trading_endpoint: T) -> Self {
+        self.spot_ws_trading_endpoint = spot_ws_trading_endpoint.into();
+        self
+    }
     /// Sets the futures rest api endpoint. Defaults to <https://fapi.binance.com>.
     ///
     /// # Arguments
@@ -168,7 +172,7 @@ impl Default for Config {
         Config {
             rest_api_endpoint: "https://api.binance.com".into(),
             ws_endpoint: "wss://stream.binance.com:9443".into(),
-
+            spot_ws_trading_endpoint: "wss://ws-api.binance.com:443/ws-api/v3".to_string(),
             futures_rest_api_endpoint: "https://fapi.binance.com".into(),
             futures_ws_endpoint: "wss://fstream.binance.com".into(),
             futures_ws_trading_endpoint: "wss://ws-fapi.binance.com/ws-fapi/v1".into(),
